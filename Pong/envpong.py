@@ -1,8 +1,6 @@
 # Daniel Cavalcanti Jeronymo
 # Pong game  using Arcade library with Neural Network training
 # 08/2020
-# 
-#
 
 import math
 import numpy as np
@@ -13,7 +11,6 @@ import arcade
 
 import gym
 from gym.spaces import Tuple,Box,Discrete,MultiDiscrete
-
 
 class Rect:
     def __init__(self, center, shape):
@@ -267,21 +264,21 @@ class PongEnv(gym.Env):
             Discrete(3, start=-1)  # 13 player 2 action
         ))
 
-            
     def step(self, actionp1, actionp2):
-        #obs = None
-        reward = 0
-        done = False
+        last_state = self.game.states[-1]
+
+        self.game.update(actionp1, actionp2)
+        
+        current_state = self.game.states[-1]
+
+        done = True if current_state.time < last_state.time else False
+
+        reward = (current_state.player1Score - current_state.player2Score) - \
+                 (last_state.player1Score - last_state.player2Score)
+
         truncated = False
         info = {}
-        
-        self.game.update(actionp1, actionp2)
-
-        # Naive reward is the difference in score between player 1 and player 2
-        reward = self.game.states[-1].player1Score - self.game.states[-1].player2Score
-        
-        # update observation
-        obs = self.getInputs(self.game.states[-1])
+        obs = self.getInputs(current_state)
 
         self.steps +=1
 
@@ -376,5 +373,4 @@ class PongGUIEnv(arcade.Window, PongEnv):
 
         if key == arcade.key.UP or key == arcade.key.DOWN:
             self.player2action = PongLogic.PaddleMove.STILL
-        
-    
+     
