@@ -2,8 +2,6 @@
 
 Este projeto apresenta a implementação de uma inteligência artificial capaz de aprender a jogar o clássico jogo Pong do zero, utilizando técnicas de aprendizado por reforço. O agente foi treinado para controlar o paddle da esquerda e, após o treinamento, alcançou uma taxa de vitória de 100% contra um oponente que joga de forma aleatória.
 
----
-
 ##  Requisitos
 
 * Python versão 3.9
@@ -11,8 +9,6 @@ Este projeto apresenta a implementação de uma inteligência artificial capaz d
 * `torch`
 * `gym==0.25.2`
 * `arcade==2.6.3`
-
----
 
 ## Instalação
 
@@ -35,8 +31,6 @@ source .venv/bin/activate
 pip install numpy torch "gym==0.25.2" "arcade==2.6.3"
 ```
 
----
-
 ## Execução
 
 1. Treinar o agente (opcional):
@@ -55,11 +49,9 @@ python pongPlayGUI.py
 
 A janela do jogo abrirá e o paddle da esquerda será controlado pela IA.
 
----
-
 ## Explicação
 
-### Algoritmo: Deep Q-Network (DQN)
+### Deep Q-Network (DQN)
 
 #### Arquitetura da rede neural:
 
@@ -73,8 +65,6 @@ A janela do jogo abrirá e o paddle da esquerda será controlado pela IA.
 2. **Ação:** Calcula os Q-values para as três ações possíveis e escolhe a de maior valor.
 3. **Recompensa:** Recebe +1 ao marcar ponto e -1 ao sofrer ponto.
 4. **Aprendizado:** Utiliza memória de repetição e o algoritmo DQN para melhorar suas decisões com o tempo.
-
----
 
 ## Estrutura
 
